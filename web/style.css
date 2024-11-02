@@ -1,5 +1,13 @@
   h1, h2 {
     text-align: center;
+    text-justify: center;
+  }
+
+  h1 {
+    font-size: 60px;
+  }
+  h2 {
+    font-size: 40px;
   }
 
 .container {
@@ -15,7 +23,7 @@
                          "a1 a2 a3"
                          "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 3.5fr 11fr 8fr 1fr;
+    grid-template-rows: 1.5fr 3.5fr 11fr 8fr 1fr;
   }
 
   header {
@@ -69,7 +77,6 @@
     background: #F6DCBF;
     white-space: nowrap;
     position: relative;
-    width: 100%;
     grid-area: images;
   }
   
@@ -93,7 +100,7 @@
   
   .images-slide {
     display: inline-block;
-    animation: 35s slide infinite linear;
+    animation: 60s slide infinite linear;
   }
   
   .images-slide img {
