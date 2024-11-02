@@ -18,13 +18,12 @@
       <h1 class="shippori-mincho-regular">Header</h1>
     </header>
     <section class="settings">
-      <h1>Settings</h1>
+      <h1>Range</h1>
       <div class="slidecontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       </div>
     </section>
-    <section class="map roboto-regular" id="map">
-      <h2>Map</h2>
+    <section class="roboto-regular map" id="map">
     </section>
     <section class="a1">
       <h2>Attraction 1</h2>
@@ -42,23 +41,59 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      var map = L.map('map').setView([34.0522, -118.2437], 10);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
       }).addTo(map);
-      /*var marker = L.marker([34.0522, -118.2437]).addTo(map);
-      marker.bindPopup("<b>Hello!</b><br>This is Los Angeles.").openPopup();*/
+      var marker = L.marker([34.0522, -118.2437]).addTo(map);
+      marker.bindPopup("<b>Hello!</b><br>This is Los Angeles.").openPopup();
     });
-      var map = L.map('map').setView([2, 0],2);
+      var map = L.map('map').setView([27.169802, 17.89216],2);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         minZoom: 2,
         attribution: '© OpenStreetMap'
       }).addTo(map);
-      function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
+      /* Temp Vars Delete*/
+      var places = {
+        "Taj Mahal": { lat: 27.1751, lng: 78.0421 },
+        "Roman Colosseum": { lat: 41.8902, lng: 12.4922 },
+        "Eiffel Tower": { lat: 48.8584, lng: 2.2941 },
+        "Statue of Liberty": { lat: 40.6892, lng: -74.0445 },
+        "Great Wall of China": { lat: 40.4319, lng: 116.5704 },
+        "Christ the Redeemer": { lat: -22.9519, lng: -43.2105 },
+        "Iguazu Falls": { lat: -25.6953, lng: -54.4367 }
+      };
+
+      var city; 
+      var popup = L.popup();
+
+      /*                      */
+
+    function isClose(city,place){
+      var distance = city.distanceTo(place); // Calculate distance in meters
+      if (distance < 200000) { // 20 km radius
+        popup
+        .setLatLng([place.lat, place.lng])
+        .setContent(Object.keys(places).find(key => places[key] === place))
+        .openOn(map);
+
+        L.marker([place.lat, place.lng]).addTo(map);
+        }
+      }
+      
+    function onMapClick(e) {
+        city = e.latlng;
+        alert("You clicked the map at " + city);
+        for (var place in places) {
+          var coords = places[place];
+          isClose(city, coords);
+      }
 }
 
+
+map.on('click', onMapClick);
   </script>
 </body>
 
