@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
   <title>MAPTRAVELS</title>
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./fonts.css" />
@@ -38,6 +39,7 @@
       </div>
     </section>
     <section class="map" id="map">
+      <div id="map"></div>
     </section>
     <section class="a1 josefin-sans-semibold">
       <h2>Attraction 1</h2>
@@ -49,7 +51,7 @@
       <h2>Attraction 3</h2>
     </section>
     <footer class="josefin-sans-semibold">
-      <h2>Footer</h2>
+      <h2>William Bradford, Nihal Mohapatro, Camus Wright</h2>
     </footer>
   </div>
 
@@ -64,7 +66,7 @@
       marker.bindPopup("<b>Hello!</b><br>This is Los Angeles.").openPopup();
     });
       var map = L.map('map', {
-      minZoom: 3,
+      minZoom: 4,
       maxZoom: 18,
       maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
   maxBoundsViscosity: 1.0
@@ -108,14 +110,7 @@
           isClose(city, coords);
       }
 }
-
-<<<<<<< HEAD
-=======
   map.on('click', onMapClick);
-  </script>
->>>>>>> 22c07c29a8e75c75d5b710531b44de02ae27c328
-
-map.on('click', onMapClick);
   </script>
 </body>
 
