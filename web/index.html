@@ -20,21 +20,21 @@
     </header>
     <section class="images">
       <div class="images-slide">
-        <img src="../resources/Pic1.jpg" alt="Image 1">
-        <img src="../resources/Pic2.jpg" alt="Image 2">
-        <img src="../resources/Pic3.jpg" alt="Image 3">
-        <img src="../resources/Pic4.jpg" alt="Image 4">
-        <img src="../resources/Pic5.jpg" alt="Image 5">
-        <img src="../resources/Pic6.jpg" alt="Image 6">
-        <img src="../resources/Pic7.jpg" alt="Image 7">
+        <img src="./resources/Pic1.jpg" alt="Image 1">
+        <img src="./resources/Pic2.jpg" alt="Image 2">
+        <img src="./resources/Pic3.jpg" alt="Image 3">
+        <img src="./resources/Pic4.jpg" alt="Image 4">
+        <img src="./resources/Pic5.jpg" alt="Image 5">
+        <img src="./resources/Pic6.jpg" alt="Image 6">
+        <img src="./resources/Pic7.jpg" alt="Image 7">
         <!-- Duplicate images for looping effect -->
-        <img src="../resources/Pic1.jpg" alt="Image 1">
-        <img src="../resources/Pic2.jpg" alt="Image 2">
-        <img src="../resources/Pic3.jpg" alt="Image 3">
-        <img src="../resources/Pic4.jpg" alt="Image 4">
-        <img src="../resources/Pic5.jpg" alt="Image 5">
-        <img src="../resources/Pic6.jpg" alt="Image 6">
-        <img src="../resources/Pic7.jpg" alt="Image 7">
+        <img src="./resources/Pic1.jpg" alt="Image 1">
+        <img src="./resources/Pic2.jpg" alt="Image 2">
+        <img src="./resources/Pic3.jpg" alt="Image 3">
+        <img src="./resources/Pic4.jpg" alt="Image 4">
+        <img src="./resources/Pic5.jpg" alt="Image 5">
+        <img src="./resources/Pic6.jpg" alt="Image 6">
+        <img src="./resources/Pic7.jpg" alt="Image 7">
       </div>
     </section>
     <section class="map" id="map">
@@ -53,7 +53,7 @@
     </footer>
   </div>
 
-  <script>
+<script>
 var map = L.map('map', {
   minZoom: 3,
   maxZoom: 18,
@@ -86,20 +86,20 @@ var places = {
 var city; 
 var popup = L.popup();
 
-
 function isClose(city,place){
   var distance = city.distanceTo(place); // Calculate distance in meters
-  if (distance < 200000) { // 20 km radius
+  if (distance < 200000) { // 200 km radius
     popup
     .setLatLng([place.lat, place.lng])
     .setContent(Object.keys(places).find(key => places[key] === place))
     /*Object.keys(places).find(key => places[key] === place*/
     .openOn(map);
     
-    place.visted = true;
+    place.visited = true;
 
-    if (place.visited === true){
+    if (place.visited == true){
       alert(Object.keys(places).find(key => places[key] === place));
+      alert("yes");
     }
     L.marker([place.lat, place.lng]).addTo(map);
   }
@@ -114,10 +114,6 @@ function onMapClick(e) {
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7bcc2a299b1d009198078270c0bbbf17e6cbf1e7
   map.on('click', onMapClick);
   </script>
   </script>
