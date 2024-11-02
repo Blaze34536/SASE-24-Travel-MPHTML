@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.5">
   <title>MAPTRAVELS</title>
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./fonts.css" />
@@ -21,25 +20,24 @@
     </header>
     <section class="images">
       <div class="images-slide">
-        <img src="./resources/Pic1.jpg" alt="Image 1">
-        <img src="./resources/Pic2.jpg" alt="Image 2">
-        <img src="./resources/Pic3.jpg" alt="Image 3">
-        <img src="./resources/Pic4.jpg" alt="Image 4">
-        <img src="./resources/Pic5.jpg" alt="Image 5">
-        <img src="./resources/Pic6.jpg" alt="Image 6">
-        <img src="./resources/Pic7.jpg" alt="Image 7">
+        <img src="../resources/Pic1.jpg" alt="Image 1">
+        <img src="../resources/Pic2.jpg" alt="Image 2">
+        <img src="../resources/Pic3.jpg" alt="Image 3">
+        <img src="../resources/Pic4.jpg" alt="Image 4">
+        <img src="../resources/Pic5.jpg" alt="Image 5">
+        <img src="../resources/Pic6.jpg" alt="Image 6">
+        <img src="../resources/Pic7.jpg" alt="Image 7">
         <!-- Duplicate images for looping effect -->
-        <img src="./resources/Pic1.jpg" alt="Image 1">
-        <img src="./resources/Pic2.jpg" alt="Image 2">
-        <img src="./resources/Pic3.jpg" alt="Image 3">
-        <img src="./resources/Pic4.jpg" alt="Image 4">
-        <img src="./resources/Pic5.jpg" alt="Image 5">
-        <img src="./resources/Pic6.jpg" alt="Image 6">
-        <img src="./resources/Pic7.jpg" alt="Image 7">
+        <img src="../resources/Pic1.jpg" alt="Image 1">
+        <img src="../resources/Pic2.jpg" alt="Image 2">
+        <img src="../resources/Pic3.jpg" alt="Image 3">
+        <img src="../resources/Pic4.jpg" alt="Image 4">
+        <img src="../resources/Pic5.jpg" alt="Image 5">
+        <img src="../resources/Pic6.jpg" alt="Image 6">
+        <img src="../resources/Pic7.jpg" alt="Image 7">
       </div>
     </section>
     <section class="map" id="map">
-      <div id="map"></div>
     </section>
     <section class="a1 josefin-sans-semibold">
       <h2>Attraction 1</h2>
@@ -51,7 +49,7 @@
       <h2>Attraction 3</h2>
     </section>
     <footer class="josefin-sans-semibold">
-      <h2>William Bradford, Nihal Mohapatro, Camus Wright</h2>
+      <h2>Footer</h2>
     </footer>
   </div>
 
@@ -76,13 +74,13 @@
       }).addTo(map);
       /* Temp Vars Delete*/
       var places = {
-        "Taj Mahal": { lat: 27.1751, lng: 78.0421 },
-        "Roman Colosseum": { lat: 41.8902, lng: 12.4922 },
-        "Eiffel Tower": { lat: 48.8584, lng: 2.2941 },
-        "Statue of Liberty": { lat: 40.6892, lng: -74.0445 },
-        "Great Wall of China": { lat: 40.4319, lng: 116.5704 },
-        "Christ the Redeemer": { lat: -22.9519, lng: -43.2105 },
-        "Iguazu Falls": { lat: -25.6953, lng: -54.4367 }
+        "Taj Mahal": { lat: 27.1751, lng: 78.0421, clicked: false},
+        "Roman Colosseum": { lat: 41.8902, lng: 12.4922, clicked: false},
+        "Eiffel Tower": { lat: 48.8584, lng: 2.2941, clicked: false},
+        "Statue of Liberty": { lat: 40.6892, lng: -74.0445, clicked: false},
+        "Great Wall of China": { lat: 40.4319, lng: 116.5704, clicked: false},
+        "Christ the Redeemer": { lat: -22.9519, lng: -43.2105, clicked: false},
+        "Iguazu Falls": { lat: -25.6953, lng: -54.4367, clicked: false}
       };
 
       var city; 
@@ -99,6 +97,8 @@
         .openOn(map);
 
         L.marker([place.lat, place.lng]).addTo(map);
+
+        
         }
       }
       
@@ -110,7 +110,10 @@
           isClose(city, coords);
       }
 }
+
+
   map.on('click', onMapClick);
+  </script>
   </script>
 </body>
 
