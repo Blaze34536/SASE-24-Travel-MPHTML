@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Grid Stuff</title>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -15,22 +17,43 @@
     <section class="settings">
       <h1>Settings</h1>
     </section>
-    <section class="map">
+    <section class="map" id="map">
       <h2>Map</h2>
     </section>
     <section class="a1">
-      <h2>Attraction</h2>
+      <h2>Attraction 1</h2>
     </section>
     <section class="a2">
-      <h2>Attraction</h2>
+      <h2>Attraction 2</h2>
     </section>
     <section class="a3">
-      <h2>Attraction</h2>
+      <h2>Attraction 3</h2>
     </section>
     <footer>
       <h2>Footer</h2>
     </footer>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var map = L.map('map').setView([2, 0],2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        minZoom: 0,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+      function onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
+    alert("You clicked the map at " + e.target.zoom);
+
+}
+
+map.on('click', onMapClick);
+    });
+  map.on('zoomend', function (e) {
+    console.log(e.target._zoom);
+});
+  </script>
 </body>
 
 </html>
