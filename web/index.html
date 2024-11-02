@@ -60,6 +60,8 @@
         maxZoom: 19,
         attribution: '© OpenStreetMap'
       }).addTo(map);
+      var marker = L.marker([34.0522, -118.2437]).addTo(map);
+      marker.bindPopup("<b>Hello!</b><br>This is Los Angeles.").openPopup();
     });
       var map = L.map('map', {
       minZoom: 3,
@@ -70,14 +72,51 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
       }).addTo(map);
-      function onMapClick(e) {
-    alert("You clicked the map at " + e.latlng);
-}
-    /* Temp Vars to setup*/
+      /* Temp Vars Delete*/
+      var places = {
+        "Taj Mahal": { lat: 27.1751, lng: 78.0421 },
+        "Roman Colosseum": { lat: 41.8902, lng: 12.4922 },
+        "Eiffel Tower": { lat: 48.8584, lng: 2.2941 },
+        "Statue of Liberty": { lat: 40.6892, lng: -74.0445 },
+        "Great Wall of China": { lat: 40.4319, lng: 116.5704 },
+        "Christ the Redeemer": { lat: -22.9519, lng: -43.2105 },
+        "Iguazu Falls": { lat: -25.6953, lng: -54.4367 }
+      };
 
+      var city; 
+      var popup = L.popup();
+
+      /*                      */
+
+    function isClose(city,place){
+      var distance = city.distanceTo(place); // Calculate distance in meters
+      if (distance < 200000) { // 20 km radius
+        popup
+        .setLatLng([place.lat, place.lng])
+        .setContent(Object.keys(places).find(key => places[key] === place))
+        .openOn(map);
+
+        L.marker([place.lat, place.lng]).addTo(map);
+        }
+      }
+      
+    function onMapClick(e) {
+        city = e.latlng;
+        alert("You clicked the map at " + city);
+        for (var place in places) {
+          var coords = places[place];
+          isClose(city, coords);
+      }
+}
+
+<<<<<<< HEAD
+=======
   map.on('click', onMapClick);
   </script>
+>>>>>>> 22c07c29a8e75c75d5b710531b44de02ae27c328
 
+map.on('click', onMapClick);
+  </script>
 </body>
 
 </html>
