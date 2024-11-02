@@ -3,38 +3,52 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>SASE 2024 Travel</title>
+  <title>MAPTRAVELS</title>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./fonts.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Shippori+Mincho&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
-    <header class="shippori-mincho-regular">
-      <h1 class="shippori-mincho-regular">Header</h1>
+    <header>
+      <h1 class="josefin-sans-bold">MAPTRAVELS</h1>
     </header>
-    <section class="settings">
-      <h1>Range</h1>
-      <div class="slidecontainer">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    <section class="images">
+      <div class="images-slide">
+        <img src="./resources/Pic1.jpg" alt="Image 1">
+        <img src="./resources/Pic2.jpg" alt="Image 2">
+        <img src="./resources/Pic3.jpg" alt="Image 3">
+        <img src="./resources/Pic4.jpg" alt="Image 4">
+        <img src="./resources/Pic5.jpg" alt="Image 5">
+        <img src="./resources/Pic6.jpg" alt="Image 6">
+        <img src="./resources/Pic7.jpg" alt="Image 7">
+        <!-- Duplicate images for looping effect -->
+        <img src="./resources/Pic1.jpg" alt="Image 1">
+        <img src="./resources/Pic2.jpg" alt="Image 2">
+        <img src="./resources/Pic3.jpg" alt="Image 3">
+        <img src="./resources/Pic4.jpg" alt="Image 4">
+        <img src="./resources/Pic5.jpg" alt="Image 5">
+        <img src="./resources/Pic6.jpg" alt="Image 6">
+        <img src="./resources/Pic7.jpg" alt="Image 7">
       </div>
     </section>
-    <section class="roboto-regular map" id="map">
+    <section class="map" id="map">
     </section>
-    <section class="a1">
+    <section class="a1 josefin-sans-semibold">
       <h2>Attraction 1</h2>
     </section>
-    <section class="a2">
+    <section class="a2 josefin-sans-semibold">
       <h2>Attraction 2</h2>
     </section>
-    <section class="a3">
+    <section class="a3 josefin-sans-semibold">
       <h2>Attraction 3</h2>
     </section>
-    <footer>
+    <footer class="josefin-sans-semibold">
       <h2>Footer</h2>
     </footer>
   </div>
@@ -47,10 +61,13 @@
         attribution: '© OpenStreetMap'
       }).addTo(map);
     });
-      var map = L.map('map').setView([27.169802, 17.89216],2);
+      var map = L.map('map', {
+  minZoom: 3,
+  maxZoom: 18,
+  maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
+  maxBoundsViscosity: 1.0
+}).setView([27.169802, 17.89216],2);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        minZoom: 2,
         attribution: '© OpenStreetMap'
       }).addTo(map);
       function onMapClick(e) {
