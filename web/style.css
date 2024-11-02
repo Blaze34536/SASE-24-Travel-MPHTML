@@ -10,7 +10,7 @@
                          "a1 a2 a3"
                          "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 8fr 4fr 1fr;
+    grid-template-rows: 1fr 2fr 8fr 6fr 1fr;
   }
   
   h1, h2 {
