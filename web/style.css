@@ -1,10 +1,33 @@
-header {
-  background-color: dodgerblue;
-  grid-area: header;
-  z-index: 200;
-  padding: 0%;
-  width: 100%;
+  body {
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-name: fontfix;
+    -webkit-animation-duration: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
 }
+
+@-webkit-keyframes fontfix {
+    from { opacity: 1; }
+    to   { opacity: 1; }
+}
+  
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 30px;
+    src: url(../fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+    }
+
+  @font-face {
+    font-family: 'ShipporiMincho';
+    font-style: normal;
+    font-weight: 30px;
+    src: url(../fonts/Shippori_Mincho/ShipporiMincho-Regular.ttf) format('truetype');
+      }
+
+  h1, h2 {
+    text-align: center;
+  }
 
 .container {
     display: grid;
@@ -22,39 +45,86 @@ header {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 2fr 12fr 8fr 1fr;
   }
-  
-  h1, h2 {
-    font-family: monospace;
-    text-align: center;
+
+  header {
+    background-color: #F7A440;
+    grid-area: header;
+    z-index: 200;
+    padding: 0%;
+    width: 100%;
+    font-family: 'ShipporiMincho';
   }
   
   .settings {
-    background-color: beige;
+    background-color: #F6DCBF;
     grid-area: settings;
   }
 
   .map {
-    background-color: dodgerblue;
+    background-color: #F6DCBF;
     grid-area: map;
   }
   
   
   .a1 {
-    background-color: dodgerblue;
+    background-color: #F6DCBF;
     grid-area: a1;
   }
   
   .a2 {
-    background-color: beige;
+    background-color: #F6DCBF;
     grid-area: a2;
   }
 
   .a3 {
-    background-color: dodgerblue;
+    background-color: #F6DCBF;
     grid-area: a3;
   }
   
   footer {
-    background-color: dodgerblue;
+    background-color: #E1701A;
     grid-area: footer;
+  }
+
+  .slidecontainer {
+    width: 100%; /* Width of the outside container */
+    justify-items: auto;
+    align-items: center;
+  }
+  
+  /* The slider itself */
+  .slider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #F7A440;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #F7A440;
+    cursor: pointer;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
   }
