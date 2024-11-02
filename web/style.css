@@ -1,0 +1,55 @@
+.container {
+    display: grid;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    gap: 10px;
+    grid-template-areas: "header header header"
+                         "settings settings settings"
+                         "map map map"
+                         "a1 a2 a3"
+                         "footer footer footer";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 8fr 4fr 1fr;
+  }
+  
+  h1, h2 {
+    font-family: monospace;
+    text-align: center;
+  }
+  
+  header {
+    background-color: dodgerblue;
+    grid-area: header;
+  }
+  
+  .settings {
+    background-color: beige;
+    grid-area: settings;
+  }
+
+  .map {
+    background-color: dodgerblue;
+    grid-area: map;
+  }
+  
+  
+  .a1 {
+    background-color: dodgerblue;
+    grid-area: a1;
+  }
+  
+  .a2 {
+    background-color: beige;
+    grid-area: a2;
+  }
+
+  .a3 {
+    background-color: dodgerblue;
+    grid-area: a3;
+  }
+  
+  footer {
+    background-color: dodgerblue;
+    grid-area: footer;
+  }
