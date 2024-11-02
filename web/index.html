@@ -39,13 +39,13 @@
     </section>
     <section class="map" id="map">
     </section>
-    <section class="a1 josefin-sans-semibold">
+    <section class="a1 josefin-sans-semibold" id="a1">
       <h2>Attraction 1</h2>
     </section>
-    <section class="a2 josefin-sans-semibold">
+    <section class="a2 josefin-sans-semibold" id="a2">
       <h2>Attraction 2</h2>
     </section>
-    <section class="a3 josefin-sans-semibold">
+    <section class="a3 josefin-sans-semibold" id="a3">
       <h2>Attraction 3</h2>
     </section>
     <footer class="josefin-sans-semibold">
@@ -53,64 +53,68 @@
     </footer>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var map = L.map('map').setView([34.0522, -118.2437], 10);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-      }).addTo(map);
-      var marker = L.marker([34.0522, -118.2437]).addTo(map);
-      marker.bindPopup("<b>Hello!</b><br>This is Los Angeles.").openPopup();
-    });
-      var map = L.map('map', {
-      minZoom: 4,
-      maxZoom: 18,
-      maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
+<script>
+import React from 'react';
+
+var map = L.map('map', {
+  minZoom: 3,
+  maxZoom: 18,
+  maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
   maxBoundsViscosity: 1.0
 }).setView([27.169802, 17.89216],2);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-      }).addTo(map);
-      /* Temp Vars Delete*/
-      var places = {
-        "Taj Mahal": { lat: 27.1751, lng: 78.0421, clicked: false},
-        "Roman Colosseum": { lat: 41.8902, lng: 12.4922, clicked: false},
-        "Eiffel Tower": { lat: 48.8584, lng: 2.2941, clicked: false},
-        "Statue of Liberty": { lat: 40.6892, lng: -74.0445, clicked: false},
-        "Great Wall of China": { lat: 40.4319, lng: 116.5704, clicked: false},
-        "Christ the Redeemer": { lat: -22.9519, lng: -43.2105, clicked: false},
-        "Iguazu Falls": { lat: -25.6953, lng: -54.4367, clicked: false}
-      };
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'}).addTo(map);
 
-      var city; 
-      var popup = L.popup();
+var places = { 
+"Taj Mahal": { lat: 27.1751, lng: 78.0421, visited: false  },
+ "Roman Colosseum": { lat: 41.8902, lng: 12.4922 , visited: false }, 
+ "Petra": { lat: 30.3285, lng: 35.4444, visited: false  },
+ "Christ the Redeemer" : { lat: -22.9519, lng: -43.2105, visited: false  }, 
+"Great Wall of China": { lat: 40.4319, lng: 116.5704, visited: false  },
+ "Chichen Itza": { lat: 20.6843, lng: -88.5678 , visited: false }, 
+ "Machu Picchu": { lat: -13.1632, lng: -72.5453 , visited: false }, 
+ "Fatehpur Sikri": { lat: 27.0945, lng: 77.6679, visited: false  }, 
+ "Agra Fort": { lat: 27.1795, lng: 78.0211, visited: false  }, 
+ "Itmad ud Daulah Tomb": { lat: 27.1929, lng: 78.0310 , visited: false }, 
+ "Mount Fuji": { lat: 35.3606, lng: 138.7274, visited: false  }, 
+ "Hakone Shrine" :{ lat: 35.2338, lng: 139.1088 , visited: false }, 
+ "Lake Kawaguchi" :{ lat: 35.5171, lng: 138.7518 , visited: false }, 
+ "Parque Estadual da Pedra Branca" :{ lat: -22.9424, lng: -43.4934 , visited: false }, 
+ "Parque Nacional de Tijuca": { lat: -22.9414, lng: -43.2928, visited: false  }, 
+ "Iguazu Falls": { lat: -25.6953, lng: -54.4367, visited: false  }, 
+ };
 
-      /*                      */
 
-    function isClose(city,place){
-      var distance = city.distanceTo(place); // Calculate distance in meters
-      if (distance < 200000) { // 20 km radius
-        popup
-        .setLatLng([place.lat, place.lng])
-        .setContent(Object.keys(places).find(key => places[key] === place))
-        .openOn(map);
+var city; 
+var popup = L.popup();
 
-        L.marker([place.lat, place.lng]).addTo(map);
+function isClose(city,place){
+  var distance = city.distanceTo(place); // Calculate distance in meters
+  if (distance < 200000) { // 200 km radius
+    popup
+    .setLatLng([place.lat, place.lng])
+    .setContent(Object.keys(places).find(key => places[key] === place))
+    /*Object.keys(places).find(key => places[key] === place*/
+    .openOn(map);
+    
+    place.visited = true;
 
-        
-        }
-      }
+    L.marker([place.lat, place.lng]).addTo(map);
+  }
+}
       
-    function onMapClick(e) {
-        city = e.latlng;
-        alert("You clicked the map at " + city);
-        for (var place in places) {
-          var coords = places[place];
-          isClose(city, coords);
-      }
+function onMapClick(e) {
+  city = e.latlng;
+  alert("You clicked the map at " + city);
+  for (var place in places) {
+  var coords = places[place];
+  isClose(city, coords);
+  }
 }
 
+function attDisplay(e) {
+  document.getElementById
+}
 
   map.on('click', onMapClick);
   </script>
