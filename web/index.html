@@ -14,6 +14,22 @@
 </head>
 
 <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MAPTRAVELS</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./fonts.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
   <div class="container">
     <header>
       <h1 class="josefin-sans-bold">MAPTRAVELS</h1>
@@ -38,6 +54,7 @@
       </div>
     </section>
     <section class="map" id="map">
+      <button class="home-button" id="homeBtn">Home</button>
     </section>
     <section class="a1 josefin-sans-semibold">
       <h2>Attraction 1</h2>
@@ -53,65 +70,84 @@
     </footer>
   </div>
 
-<script>
-var map = L.map('map', {
-  minZoom: 3,
-  maxZoom: 18,
-  maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
-  maxBoundsViscosity: 1.0
-}).setView([27.169802, 17.89216],2);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'}).addTo(map);
+  <script>
+    var map = L.map('map', {
+      minZoom: 3,
+      maxZoom: 18,
+      maxBounds: [[-90, -180], [90, 180]], // adjust accordingly
+      maxBoundsViscosity: 1.0
+    }).setView([27.169802, 17.89216], 2);
 
-var places = { 
-"Taj Mahal": { lat: 27.1751, lng: 78.0421, visited: false  },
- "Roman Colosseum": { lat: 41.8902, lng: 12.4922 , visited: false }, 
- "Petra": { lat: 30.3285, lng: 35.4444, visited: false  },
- "Christ the Redeemer" : { lat: -22.9519, lng: -43.2105, visited: false  }, 
-"Great Wall of China": { lat: 40.4319, lng: 116.5704, visited: false  },
- "Chichen Itza": { lat: 20.6843, lng: -88.5678 , visited: false }, 
- "Machu Picchu": { lat: -13.1632, lng: -72.5453 , visited: false }, 
- "Fatehpur Sikri": { lat: 27.0945, lng: 77.6679, visited: false  }, 
- "Agra Fort": { lat: 27.1795, lng: 78.0211, visited: false  }, 
- "Itmad ud Daulah Tomb": { lat: 27.1929, lng: 78.0310 , visited: false }, 
- "Mount Fuji": { lat: 35.3606, lng: 138.7274, visited: false  }, 
- "Hakone Shrine" :{ lat: 35.2338, lng: 139.1088 , visited: false }, 
- "Lake Kawaguchi" :{ lat: 35.5171, lng: 138.7518 , visited: false }, 
- "Parque Estadual da Pedra Branca" :{ lat: -22.9424, lng: -43.4934 , visited: false }, 
- "Parque Nacional de Tijuca": { lat: -22.9414, lng: -43.2928, visited: false  }, 
- "Iguazu Falls": { lat: -25.6953, lng: -54.4367, visited: false  }, 
- };
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
 
+    var places = {
+      "Taj Mahal": { lat: 27.1751, lng: 78.0421, visited: false },
+      "Roman Colosseum": { lat: 41.8902, lng: 12.4922, visited: false },
+      "Petra": { lat: 30.3285, lng: 35.4444, visited: false },
+      "Christ the Redeemer": { lat: -22.9519, lng: -43.2105, visited: false },
+      "Great Wall of China": { lat: 40.4319, lng: 116.5704, visited: false },
+      "Chichen Itza": { lat: 20.6843, lng: -88.5678, visited: false },
+      "Machu Picchu": { lat: -13.1632, lng: -72.5453, visited: false },
+      "Fatehpur Sikri": { lat: 27.0945, lng: 77.6679, visited: false },
+      "Agra Fort": { lat: 27.1795, lng: 78.0211, visited: false },
+      "Itmad ud Daulah Tomb": { lat: 27.1929, lng: 78.0310, visited: false },
+      "Mount Fuji": { lat: 35.3606, lng: 138.7274, visited: false },
+      "Hakone Shrine": { lat: 35.2338, lng: 139.1088, visited: false },
+      "Lake Kawaguchi": { lat: 35.5171, lng: 138.7518, visited: false },
+      "Parque Estadual da Pedra Branca": { lat: -22.9424, lng: -43.4934, visited: false },
+      "Parque Nacional de Tijuca": { lat: -22.9414, lng: -43.2928, visited: false },
+      "Iguazu Falls": { lat: -25.6953, lng: -54.4367, visited: false },
+    }; // Hardcoded list of attractions would use apis to get this info
 
-var city; 
-var popup = L.popup();
+    var markers = []; // Array to store markers
 
-function isClose(city,place){
-  var distance = city.distanceTo(place); // Calculate distance in meters
-  if (distance < 200000) { // 200 km radius
-    popup
-    .setLatLng([place.lat, place.lng])
-    .setContent(Object.keys(places).find(key => places[key] === place))
-    /*Object.keys(places).find(key => places[key] === place*/
-    .openOn(map);
-    
-    place.visited = true;
+    function createMarker(placeName, coords) {
+      var marker = L.marker([coords.lat, coords.lng]).addTo(map);
+      marker.bindPopup(placeName);
+      markers.push(marker); // Store the marker in the array
+    }
 
-    L.marker([place.lat, place.lng]).addTo(map);
-  }
-}
-      
-function onMapClick(e) {
-  city = e.latlng;
-  alert("You clicked the map at " + city);
-  for (var place in places) {
-  var coords = places[place];
-  isClose(city, coords);
-  }
-}
+    function isClose(city, place) {
+      var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
+      return distance < 200000; // 200 km radius
+    }
 
-  map.on('click', onMapClick);
-  </script>
+    function onMapClick(e) {
+      var cityClicked = e.latlng;
+      var placesToZoom = []; // Array to store coordinates of places that have markers
+
+      for (var placeName in places) {
+        var coords = places[placeName];
+        if (isClose(cityClicked, coords) && !places[placeName].visited) {
+          createMarker(placeName, coords); // Create and add the marker
+          places[placeName].visited = true; // Mark this place as visited
+          placesToZoom.push([coords.lat, coords.lng]); // Add coordinates for zooming
+        }
+      }
+
+      // If there are places to zoom in on, adjust the map view
+      if (placesToZoom.length > 0) {
+        var group = L.latLngBounds(placesToZoom); // Create a bounds object
+        map.fitBounds(group); // Zoom into the bounds of the markers
+      }
+    }
+
+    // Function to reset the map view to the original location
+    function resetMap() {
+      map.setView([27.169802, 17.89216], 2); // Set to original coordinates and zoom level
+      markers.forEach(marker => map.removeLayer(marker)); // Remove existing markers
+      markers = []; // Reset markers array
+      for (var placeName in places) {
+        places[placeName].visited = false; // Reset visited status
+      }
+    }
+
+    // Add event listener to the home button
+    document.getElementById('homeBtn').addEventListener('click', resetMap);
+
+    map.on('click', onMapClick);
   </script>
 </body>
 
