@@ -37,8 +37,7 @@
         <img src="../resources/Pic7.jpg" alt="Image 7">
       </div>
     </section>
-    <section class="map" id="map">
-    </section>
+      <section id="map"></section>
     <section class="a1 josefin-sans-semibold" id="a1">
       <h2>Attraction 1</h2>
     </section>
@@ -49,13 +48,11 @@
       <h2>Attraction 3</h2>
     </section>
     <footer class="josefin-sans-semibold">
-      <h2>Footer</h2>
+      <h2>Nihal Mohapatro | William Bradford | Camus Wright</h2>
     </footer>
   </div>
 
 <script>
-import React from 'react';
-
 var map = L.map('map', {
   minZoom: 3,
   maxZoom: 18,
@@ -88,36 +85,111 @@ var places = {
 var city; 
 var popup = L.popup();
 
-function isClose(city,place){
-  var distance = city.distanceTo(place); // Calculate distance in meters
-  if (distance < 200000) { // 200 km radius
-    popup
-    .setLatLng([place.lat, place.lng])
-    .setContent(Object.keys(places).find(key => places[key] === place))
-    /*Object.keys(places).find(key => places[key] === place*/
-    .openOn(map);
-    
-    place.visited = true;
+function isClose(city, place) {
+  var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
+  if (distance < 200000 && !place.visited) { // Only proceed if not visited
+    place.visited = true; // Mark the place as visited
 
-    L.marker([place.lat, place.lng]).addTo(map);
+    const marker = L.marker([place.lat, place.lng]).addTo(map);
+    
+    // Add a click event to the marker
+    marker.on('click', function() {
+      renderParagraph(Object.keys(places).find(key => places[key] === place));
+    });
   }
 }
-      
+
+function renderParagraph(place) {
+  // Check if a3 already has content
+  const targetDivA3 = document.getElementById('a3');
+  if (targetDivA3.querySelector('p[data-place]')) {
+    return; // Exit if a3 already has content
+  }
+
+  const pElement = document.createElement('p');
+  pElement.textContent = `${place} has been visited.`;
+  pElement.setAttribute('data-place', place); // Unique identifier for the paragraph
+
+  // Check each div to see where to append the paragraph
+  const targetDivA1 = document.getElementById('a1');
+  const targetDivA2 = document.getElementById('a2');
+
+  // Append logic
+  if (!targetDivA1.querySelector('p[data-place]')) {
+    targetDivA1.appendChild(pElement);
+  } else if (!targetDivA2.querySelector('p[data-place]')) {
+    targetDivA2.appendChild(pElement);
+  } else if (targetDivA3) {
+    targetDivA3.appendChild(pElement);
+  }
+}
+
+// Adjusting the onMapClick function
 function onMapClick(e) {
   city = e.latlng;
-  alert("You clicked the map at " + city);
+  
   for (var place in places) {
-  var coords = places[place];
-  isClose(city, coords);
+    var coords = places[place];
+    isClose(city, coords);
   }
 }
 
-function attDisplay(e) {
-  document.getElementById
+map.on('click', onMapClick);
+function isClose(city, place) {
+  var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
+  if (distance < 200000 && !place.visited) { // Only proceed if not visited
+    place.visited = true; // Mark the place as visited
+
+    const marker = L.marker([place.lat, place.lng]).addTo(map);
+    
+    // Add a click event to the marker
+    marker.on('click', function() {
+      renderParagraph(Object.keys(places).find(key => places[key] === place));
+    });
+  }
 }
 
+function renderParagraph(place) {
+  // Check if a3 already has content
+  const targetDivA3 = document.getElementById('a3');
+  if (targetDivA3.querySelector('p[data-place]')) {
+    return; // Exit if a3 already has content
+  }
+
+  const pElement = document.createElement('p');
+  pElement.textContent = `${place} has been visited.`;
+  pElement.setAttribute('data-place', place); // Unique identifier for the paragraph
+
+  // Check each div to see where to append the paragraph
+  const targetDivA1 = document.getElementById('a1');
+  const targetDivA2 = document.getElementById('a2');
+
+  // Append logic
+  if (!targetDivA1.querySelector('p[data-place]')) {
+    targetDivA1.appendChild(pElement);
+  } else if (!targetDivA2.querySelector('p[data-place]')) {
+    targetDivA2.appendChild(pElement);
+  } else if (targetDivA3) {
+    targetDivA3.appendChild(pElement);
+  }
+}
+
+// Adjusting the onMapClick function
+function onMapClick(e) {
+  city = e.latlng;
+  
+  for (var place in places) {
+    var coords = places[place];
+    isClose(city, coords);
+  }
+}
+
+map.on('click', onMapClick);
+
+
+
+
   map.on('click', onMapClick);
-  </script>
   </script>
 </body>
 

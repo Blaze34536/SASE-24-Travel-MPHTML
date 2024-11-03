@@ -1,11 +1,3 @@
-body {
-  width: 200%;
-  height: 20%;
-  transform-origin: top left;
-  transform: scale(50%);
-  max-height: 1000px;
-}
-  
   /* Text Styles */
   h1, h2 { /*Centers Everything*/
     text-align: center;
@@ -33,7 +25,7 @@ body {
                          "a1 a2 a3"
                          "footer footer footer";
     grid-template-columns: 1fr 1fr 1fr; /*3 equal columns*/
-    grid-template-rows: 1.5fr 3.5fr 14fr 8fr 1fr; /*5 not equal rows*/
+    grid-template-rows: 1.5fr 3.5fr 8fr 6fr 1fr; /*5 not equal rows*/
   }
 
   header {
@@ -47,9 +39,14 @@ body {
     align-items: center;
   }
 
-  .map {
-    background-color: #F6DCBF; /*bg color*/
+  #map {
     grid-area: map; /* Grid area */
+    width: 90%;
+    text-align: center;
+  }
+
+  #map {
+    background-color: #F6DCBF; /*bg color*/
   }
   
   
