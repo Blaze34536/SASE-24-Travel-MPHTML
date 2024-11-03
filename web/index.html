@@ -14,22 +14,6 @@
 </head>
 
 <body>
-  <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>MAPTRAVELS</title>
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./fonts.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-</head>
-
-<body>
   <div class="container">
     <header>
       <h1 class="josefin-sans-bold">MAPTRAVELS</h1>
@@ -56,14 +40,15 @@
     <section class="map" id="map">
       <button class="home-button" id="homeBtn">Home</button>
     </section>
-    <section class="a1 josefin-sans-semibold">
+    <section id="a1" class="a1 josefin-sans-semibold">
       <h2>Attraction 1</h2>
     </section>
-    <section class="a2 josefin-sans-semibold">
+    <section id="a2" class="a2 josefin-sans-semibold">
       <h2>Attraction 2</h2>
     </section>
-    <section class="a3 josefin-sans-semibold">
+    <section id="a3" class="a3 josefin-sans-semibold">
       <h2>Attraction 3</h2>
+    </section>
     </section>
     <footer class="josefin-sans-semibold">
       <h2>Footer</h2>
@@ -103,23 +88,29 @@
 
     var markers = []; // Array to store markers
 
-    function createMarker(placeName, coords) {
-      var marker = L.marker([coords.lat, coords.lng]).addTo(map);
-      marker.bindPopup(placeName);
-      markers.push(marker); // Store the marker in the array
-    }
-
-    function isClose(city, place) {
-      var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
-      return distance < 200000; // 200 km radius
-      marker.on('click', function() {
-      renderParagraph(Object.keys(places).find(key => places[key] === place));
-    });
-  }
-    
-    function renderParagraph(place) {
-  // Check if a3 already has content
+  function createMarker(places, placeName, coords) {
+  var marker = L.marker([coords.lat, coords.lng]).addTo(map);
+  marker.bindPopup(placeName);
+  markers.push(marker); // Store the marker in the array
+  
+  // Directly pass placeName to renderParagraph to avoid lookup issues
+  marker.on('click', function() {
+    renderParagraph(placeName); // Pass placeName directly
+  });
+}
+  function renderParagraph(place) {
+  // Define the target div elements
+  const targetDivA1 = document.getElementById('a1');
+  const targetDivA2 = document.getElementById('a2');
   const targetDivA3 = document.getElementById('a3');
+
+  // Ensure all divs exist before accessing them
+  if (!targetDivA1 || !targetDivA2 || !targetDivA3) {
+    console.error("One or more target divs (a1, a2, a3) are missing in the HTML.");
+    return;
+  }
+
+  // Check if a3 already has content
   if (targetDivA3.querySelector('p[data-place]')) {
     return; // Exit if a3 already has content
   }
@@ -128,19 +119,20 @@
   pElement.textContent = `${place} has been visited.`;
   pElement.setAttribute('data-place', place); // Unique identifier for the paragraph
 
-  // Check each div to see where to append the paragraph
-  const targetDivA1 = document.getElementById('a1');
-  const targetDivA2 = document.getElementById('a2');
-
   // Append logic
   if (!targetDivA1.querySelector('p[data-place]')) {
     targetDivA1.appendChild(pElement);
   } else if (!targetDivA2.querySelector('p[data-place]')) {
     targetDivA2.appendChild(pElement);
-  } else if (targetDivA3) {
+  } else {
     targetDivA3.appendChild(pElement);
   }
 }
+
+    function isClose(city, place) {
+      var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
+      return distance < 200000; // 200 km radius
+    }
 
 
     function onMapClick(e) {
@@ -150,7 +142,7 @@
       for (var placeName in places) {
         var coords = places[placeName];
         if (isClose(cityClicked, coords) && !places[placeName].visited) {
-          createMarker(placeName, coords); // Create and add the marker
+          createMarker(places ,placeName, coords); // Create and add the marker
           places[placeName].visited = true; // Mark this place as visited
           placesToZoom.push([coords.lat, coords.lng]); // Add coordinates for zooming
         }
@@ -172,10 +164,8 @@
         places[placeName].visited = false; // Reset visited status
       }
     }
-
     // Add event listener to the home button
     document.getElementById('homeBtn').addEventListener('click', resetMap);
-
     map.on('click', onMapClick);
   </script>
 </body>

@@ -1,44 +1,52 @@
-  h1, h2 {
+  /* Text Styles */
+  h1, h2 { /*Centers Everything*/
     text-align: center;
     text-justify: center;
   }
 
-  h1 {
+  h1 { /*Big header*/
     font-size: 60px;
   }
-  h2 {
+  h2 { /*Smaller header*/
     font-size: 40px;
   }
 
+  /*Bunch of Grid Styles*/
 .container {
-    display: grid;
+    display: grid; /*displays it as a grid*/
     width: 100%;
     position: relative;
     margin: 0px;
     padding: 0;
-    gap: 10px;
+    gap: 10px; /*Gap b/w grid elements*/
     grid-template-areas: "header header header"
                          "images images images"
                          "map map map"
                          "a1 a2 a3"
                          "footer footer footer";
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1.5fr 3.5fr 11fr 8fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr; /*3 equal columns*/
+    grid-template-rows: 1.5fr 3.5fr 8fr 6fr 1fr; /*5 not equal rows*/
   }
 
   header {
-    background-color: #F7A440;
+    background-color: #F7A440; /*bg color*/
     grid-area: header; /* Grid area */
-    z-index: 200;
     padding: 0%;
     width: 100%;
-    font-size: larger;
+    height: 150px;
     letter-spacing: 10px;
+    justify-items: center;
+    align-items: center;
   }
 
-  .map {
-    background-color: #F6DCBF;
+  #map {
     grid-area: map; /* Grid area */
+    width: 90%;
+    text-align: center;
+  }
+
+  #map {
+    background-color: #F6DCBF; /*bg color*/
   }
 
   .home-button {
@@ -61,22 +69,22 @@
   }
   
   .a1 {
-    background-color: #F6DCBF;
+    background-color: #F6DCBF; /*bg color*/
     grid-area: a1; /* Grid area */
   }
   
   .a2 {
-    background-color: #F6DCBF;
+    background-color: #F6DCBF; /*bg color*/
     grid-area: a2; /* Grid area */
   }
 
   .a3 {
-    background-color: #F6DCBF;
+    background-color: #F6DCBF; /*bg color*/
     grid-area: a3; /* Grid area */
   }
   
   footer {
-    background-color: #E1701A;
+    background-color: #E1701A; /*bg color*/
     grid-area: footer; /* Grid area */
   }
 
@@ -92,7 +100,7 @@
   .images {
     overflow: hidden;
     padding: 60px 0;
-    background: #F6DCBF;
+    background: #F6DCBF; /*bg color*/
     white-space: nowrap;
     position: relative;
     grid-area: images;
