@@ -42,13 +42,10 @@
       <button class="home-button" id="homeBtn">Home</button>
     </section>
     <section id="a1" class="a1 josefin-sans-semibold">
-      <h2>Attraction 1</h2>
     </section>
     <section id="a2" class="a2 josefin-sans-semibold">
-      <h2>Attraction 2</h2>
     </section>
     <section id="a3" class="a3 josefin-sans-semibold">
-      <h2>Attraction 3</h2>
     </section>
     </section>
     <footer class="josefin-sans-semibold">
@@ -86,36 +83,56 @@
     renderParagraph(places, placeName); // Pass placeName directly
   });
 }
-  function renderParagraph(places, placeName) {
-  // Define the target div elements
+function renderParagraph(places, placeName) {
   const targetDivA1 = document.getElementById('a1');
   const targetDivA2 = document.getElementById('a2');
   const targetDivA3 = document.getElementById('a3');
 
-  // Ensure all divs exist before accessing them
   if (!targetDivA1 || !targetDivA2 || !targetDivA3) {
     console.error("One or more target divs (a1, a2, a3) are missing in the HTML.");
     return;
   }
 
-  // Check if a3 already has content
-  if (targetDivA3.querySelector('p[data-place]')) {
-    return; // Exit if a3 already has content
-  }
-
   const pElement = document.createElement('p');
-  pElement.textContent = `${placeName} ${places[placeName].country}`;
-  pElement.setAttribute('data-place', placeName); // Unique identifier for the paragraph
+  pElement.textContent = `${places[placeName].summary}`;
+  pElement.setAttribute('data-place', placeName);
 
-  // Append logic
-  if (!targetDivA1.querySelector('p[data-place]')) {
+  const h3Element = document.createElement('h3');
+  h3Element.textContent = `${places[placeName].country}`;
+  h3Element.setAttribute('data-place', placeName);
+
+  const h2Element = document.createElement('h2');
+  h2Element.textContent = `${placeName}`;
+  h2Element.setAttribute('data-place', placeName);
+
+  const imgElement = document.createElement('img');
+  imgElement.src = `${places[placeName].image}`;
+  imgElement.setAttribute('data-place', placeName);
+
+  // Check if a2 is empty
+  if (!targetDivA1.querySelector('h2[data-place]')) {
+    targetDivA1.appendChild(h2Element);
+    targetDivA1.appendChild(h3Element);
     targetDivA1.appendChild(pElement);
-  } else if (!targetDivA2.querySelector('p[data-place]')) {
+    targetDivA1.appendChild(imgElement);
+  } 
+  // Check if a3 is empty
+  else if (!targetDivA2.querySelector('h2[data-place]')) {
+    targetDivA2.appendChild(h2Element);
+    targetDivA2.appendChild(h3Element);
     targetDivA2.appendChild(pElement);
-  } else {
+    targetDivA2.appendChild(imgElement);
+  } 
+  // If a2 and a3 are both filled, append to a1
+  else {
+    targetDivA3.appendChild(h2Element);
+    targetDivA3.appendChild(h3Element);
     targetDivA3.appendChild(pElement);
+    targetDivA3.appendChild(imgElement);
   }
 }
+
+
 
     function isClose(city, place) {
       var distance = city.distanceTo([place.lat, place.lng]); // Calculate distance in meters
@@ -133,7 +150,6 @@
           createMarker(places ,placeName, coords); // Create and add the marker
           places[placeName].visited = true; // Mark this place as visited
           placesToZoom.push([coords.lat, coords.lng]); // Add coordinates for zooming
-          alert(places[placeName].country)
         }
       }
 

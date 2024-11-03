@@ -1,16 +1,37 @@
   /* Text Styles */
-  h1, h2 { /*Centers Everything*/
+  h1, h2, h3 { /*Centers Everything*/
     text-align: center;
     text-justify: center;
+    align-self: center;
   }
 
   h1 { /*Big header*/
     font-size: 60px;
+    font-weight: bold;
   }
   h2 { /*Smaller header*/
     font-size: 40px;
+    font-weight: bold;
+  }
+  .a1 h3, .a2 h3, .a3 h3{/*Smallerer header*/
+    font-size: 35px;
+    margin: 10px;
+  }
+  .a1 p, .a2 p, .a3 p{
+    font-size: 30px;
+    text-align: justify;
+    margin: 0 20px;
   }
 
+  .a1 img, .a2 img, .a3 img{
+    max-height: 50%;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    bottom: 10px;
+  }
+  
   /*Bunch of Grid Styles*/
 .container {
     display: grid; /*displays it as a grid*/
@@ -71,6 +92,7 @@
   .a1 {
     background-color: #F6DCBF; /*bg color*/
     grid-area: a1; /* Grid area */
+    text-align: center;
   }
   
   .a2 {
