@@ -75,6 +75,7 @@
   var popupContent = `
     <div style="text-align: center;">
       <h3>${placeName}</h3>
+      <p>${places[placeName].country}</p>
       <img src="${places[placeName].image}" alt="${placeName}" style="width: 100%; height: auto;"/>
     </div>`;
   marker.bindPopup(popupContent);
@@ -82,10 +83,10 @@
   
   // Directly pass placeName to renderParagraph to avoid lookup issues
   marker.on('click', function() {
-    renderParagraph(placeName); // Pass placeName directly
+    renderParagraph(places, placeName); // Pass placeName directly
   });
 }
-  function renderParagraph(place) {
+  function renderParagraph(places, placeName) {
   // Define the target div elements
   const targetDivA1 = document.getElementById('a1');
   const targetDivA2 = document.getElementById('a2');
@@ -103,8 +104,8 @@
   }
 
   const pElement = document.createElement('p');
-  pElement.textContent = `${place} has been visited.`;
-  pElement.setAttribute('data-place', place); // Unique identifier for the paragraph
+  pElement.textContent = `${placeName} ${places[placeName].country}`;
+  pElement.setAttribute('data-place', placeName); // Unique identifier for the paragraph
 
   // Append logic
   if (!targetDivA1.querySelector('p[data-place]')) {
@@ -132,6 +133,7 @@
           createMarker(places ,placeName, coords); // Create and add the marker
           places[placeName].visited = true; // Mark this place as visited
           placesToZoom.push([coords.lat, coords.lng]); // Add coordinates for zooming
+          alert(places[placeName].country)
         }
       }
 
