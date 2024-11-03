@@ -66,7 +66,60 @@
     }).addTo(map);
 
     var markers = []; // Array to store markers
+     var tem_markers = []; // Array for the seven wonders of the world, was going to make it disapper but ran out of time.
 
+// Define a small, circular icon for the Taj Mahal
+var Taj = L.divIcon({
+  html: `<div style="
+    background-image: url('../resources/TajMahaMarker.jpg');
+    width: 30px; 
+    height: 30px; 
+    background-size: cover;
+    border-radius: 50%; 
+    border: 2px solid white;">
+  </div>`,
+  className: "", // Remove default Leaflet icon styles
+  iconSize: [30, 30] // Set to the same width and height for a perfect circle
+});
+
+var Redeemer = L.divIcon({
+  html: `<div style="
+    background-image: url('../resources/Redeeming.png');
+    width: 30px; 
+    height: 30px; 
+    background-size: 100% 100%; /* Cover the entire div */
+    background-position: center;
+    border-radius: 50%; 
+    border: 2px solid white;">
+  </div>`,
+  className: "", // Remove default Leaflet icon styles
+  iconSize: [100, 100] // Set to the same width and height for a perfect circle
+});
+
+var Fuji = L.divIcon({
+  html: `<div style="
+    background-image: url('../resources/Circle_Fuji.png');
+    width: 100%; 
+    height: 100%; 
+    background-size: cover;
+    border-radius: 50%; 
+    border: 2px solid white;">
+  </div>`,
+  className: "", // Remove default Leaflet icon styles
+  iconSize: [30, 30] // Set to the same width and height for a perfect circle
+});
+
+// Function to create a wonder marker and store it in tem_markers
+function wondermarkers(coords, icon) {
+  var tem_marker = L.marker(coords, { icon: icon }).addTo(map); // Create and add marker to the map
+  tem_markers.push(tem_marker); // Store the marker in the array for later access
+}
+
+// Add the Taj Mahal marker with a circular icon
+wondermarkers([27.1751, 78.0421], Taj);
+wondermarkers([-22.9519, -43.2105,], Redeemer);
+wondermarkers([35.3606,138.7274], Fuji);
+    
   function createMarker(places, placeName, coords) {
   var marker = L.marker([coords.lat, coords.lng]).addTo(map);
   var popupContent = `
@@ -91,6 +144,10 @@ function renderParagraph(places, placeName) {
   if (!targetDivA1 || !targetDivA2 || !targetDivA3) {
     console.error("One or more target divs (a1, a2, a3) are missing in the HTML.");
     return;
+  }
+  
+  if (targetDivA3.querySelector('p[data-place]')) {
+    return; // Exit if a3 already has content
   }
 
   const pElement = document.createElement('p');
@@ -168,6 +225,10 @@ function renderParagraph(places, placeName) {
       for (var placeName in places) {
         places[placeName].visited = false; // Reset visited status
       }
+       // Clear the content in attraction sections
+      document.getElementById('a1').innerHTML = '<h2>Attraction 1</h2>';
+      document.getElementById('a2').innerHTML = '<h2>Attraction 2</h2>';
+      document.getElementById('a3').innerHTML = '<h2>Attraction 3</h2>';
     }
     // Add event listener to the home button
     document.getElementById('homeBtn').addEventListener('click', resetMap);
