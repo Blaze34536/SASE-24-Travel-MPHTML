@@ -99,31 +99,6 @@ function isClose(city, place) {
   }
 }
 
-function renderParagraph(place) {
-  // Check if a3 already has content
-  const targetDivA3 = document.getElementById('a3');
-  if (targetDivA3.querySelector('p[data-place]')) {
-    return; // Exit if a3 already has content
-  }
-
-  const pElement = document.createElement('p');
-  pElement.textContent = `${place} has been visited.`;
-  pElement.setAttribute('data-place', place); // Unique identifier for the paragraph
-
-  // Check each div to see where to append the paragraph
-  const targetDivA1 = document.getElementById('a1');
-  const targetDivA2 = document.getElementById('a2');
-
-  // Append logic
-  if (!targetDivA1.querySelector('p[data-place]')) {
-    targetDivA1.appendChild(pElement);
-  } else if (!targetDivA2.querySelector('p[data-place]')) {
-    targetDivA2.appendChild(pElement);
-  } else if (targetDivA3) {
-    targetDivA3.appendChild(pElement);
-  }
-}
-
 // Adjusting the onMapClick function
 function onMapClick(e) {
   city = e.latlng;
@@ -183,12 +158,6 @@ function onMapClick(e) {
     isClose(city, coords);
   }
 }
-
-map.on('click', onMapClick);
-
-
-
-
   map.on('click', onMapClick);
   </script>
 </body>
