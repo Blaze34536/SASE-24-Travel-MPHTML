@@ -226,9 +226,9 @@ function renderParagraph(places, placeName) {
         places[placeName].visited = false; // Reset visited status
       }
        // Clear the content in attraction sections
-      document.getElementById('a1').innerHTML = '<h2>Attraction 1</h2>';
-      document.getElementById('a2').innerHTML = '<h2>Attraction 2</h2>';
-      document.getElementById('a3').innerHTML = '<h2>Attraction 3</h2>';
+      document.getElementById('a1').innerHTML = '<div></div>';
+      document.getElementById('a2').innerHTML = '<div></div>';
+      document.getElementById('a3').innerHTML = '<div></div>';
     }
     // Add event listener to the home button
     document.getElementById('homeBtn').addEventListener('click', resetMap);
