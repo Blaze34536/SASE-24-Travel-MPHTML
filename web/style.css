@@ -41,7 +41,7 @@
 
   #map {
     grid-area: map; /* Grid area */
-    width: 90%;
+    width: 100%;
     align-content: center;
   }
 
